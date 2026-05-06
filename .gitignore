@@ -1,0 +1,6 @@
+# Ignore files
+*.log
+
+# Ignore temp folders
+temp/
+bob-wks-topic/

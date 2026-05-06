@@ -1,0 +1,3 @@
+[submodule "bob-wks-topic"]
+	path = bob-wks-topic
+	url = https://github.ibm.com/owenchen/bob-workshop-topic.git
