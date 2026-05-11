@@ -1,3 +1,3 @@
-[submodule "bob-wks-topic"]
-	path = bob-wks-topic
+[submodule "bob-workshop-topic"]
+	path = bob-workshop-topic
 	url = https://github.ibm.com/owenchen/bob-workshop-topic.gi
