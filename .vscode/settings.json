@@ -1,4 +1,16 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive"
+  "java.import.maven.enabled": true,
+  "java.project.sourcePaths": [
+    "topics/journey-analysis/src/main/java",
+    "topics/station-system/src/main/java",
+    "topics/transaction-monitor/src/main/java"
+  ],
+  "java.project.resourcePaths": [
+    "topics/journey-analysis/src/main/resources",
+    "topics/station-system/src/main/resources",
+    "topics/transaction-monitor/src/main/resources"
+  ],
+  "java.project.outputPath": "target/classes"
 }
+
+// Made with Bob

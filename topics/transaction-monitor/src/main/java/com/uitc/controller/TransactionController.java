@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 
@@ -140,16 +141,16 @@ public class TransactionController {
             .reduce(BigDecimal.ZERO, BigDecimal::add);
         
         long approvedCount = allTransactions.stream()
-            .filter(t -> t.getStatus().name().equals("APPROVED"))
+            .filter(t -> t.getStatus() != null && "APPROVED".equals(t.getStatus().name()))
             .count();
         
         return ResponseEntity.ok(Map.of(
             "totalTransactions", allTransactions.size(),
             "totalAmount", totalAmount,
             "approvedCount", approvedCount,
-            "averageAmount", allTransactions.isEmpty() ? 
-                BigDecimal.ZERO : 
-                totalAmount.divide(BigDecimal.valueOf(allTransactions.size()), 2, BigDecimal.ROUND_HALF_UP)
+            "averageAmount", allTransactions.isEmpty() ?
+                BigDecimal.ZERO :
+                totalAmount.divide(BigDecimal.valueOf(allTransactions.size()), 2, RoundingMode.HALF_UP)
         ));
     }
 }
