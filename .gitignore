@@ -4,3 +4,6 @@
 # Ignore temp folders
 temp/
 design-docs/
+
+#quest-questions
+questions.json

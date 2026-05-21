@@ -1,0 +1,426 @@
+/* ===== IBM Bob 知識測驗 - 雜誌風格 ===== */
+
+:root {
+    /* 雜誌配色 - 純白底 */
+    --color-bg: oklch(100% 0 0);
+    --color-surface: oklch(100% 0 0);
+    --color-text: oklch(15% 0.01 0);
+    --color-text-muted: oklch(45% 0.01 0);
+    --color-border: oklch(88% 0.005 0);
+    
+    /* 雜誌強調色 - 深墨藍 */
+    --color-accent: oklch(28% 0.05 250);
+    --color-accent-hover: oklch(22% 0.06 250);
+    --color-accent-light: oklch(96% 0.01 250);
+    
+    /* 狀態色 */
+    --color-success: oklch(48% 0.12 145);
+    --color-success-bg: oklch(94% 0.04 145);
+    --color-error: oklch(52% 0.15 25);
+    --color-error-bg: oklch(94% 0.04 25);
+    
+    /* 緊湊間距 */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    
+    /* 字體 - 獨特配對 */
+    --font-display: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    
+    /* 雜誌風格字體大小 */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
+    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem);
+    --text-xl: clamp(1.375rem, 1.25rem + 0.625vw, 1.75rem);
+    --text-2xl: clamp(1.875rem, 1.625rem + 1.25vw, 2.5rem);
+    --text-3xl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+    
+    /* Exponential easing */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 350ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== 重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== 基礎 ===== */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== 頁面結構 - 雜誌布局 ===== */
+.page-wrapper {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-4);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+/* ===== Header - 雜誌標題 ===== */
+.hero-header {
+    position: sticky;
+    top: var(--space-4);
+    padding-right: var(--space-6);
+    border-right: 1px solid var(--color-border);
+}
+
+.hero-header h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--color-text);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+}
+
+/* ===== 主內容 - 雜誌欄位 ===== */
+.main-content {
+    display: grid;
+    gap: var(--space-6);
+}
+
+/* ===== 測驗區 ===== */
+.quiz-area {
+    position: relative;
+}
+
+.quiz-header {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.category-badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ===== 問題 - 雜誌標題風格 ===== */
+.question-section {
+    margin-bottom: var(--space-6);
+}
+
+.question-text {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+}
+
+/* ===== 選項 - 雜誌列表風格 ===== */
+.options-section {
+    display: grid;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+}
+
+.option {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-3) 0;
+    cursor: pointer;
+    transition: all var(--duration-base) var(--ease-out);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-3);
+    align-items: baseline;
+    text-align: left;
+}
+
+.option:hover:not(.disabled) {
+    border-bottom-color: var(--color-accent);
+    padding-left: var(--space-2);
+}
+
+.option:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.option-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text-muted);
+    min-width: 1.5rem;
+}
+
+.option-text {
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: var(--text-base);
+}
+
+/* ===== 答案狀態 - 視覺反饋 ===== */
+.option.correct {
+    border-bottom-color: var(--color-success);
+    background: var(--color-success-bg);
+}
+
+.option.correct .option-label {
+    color: var(--color-success);
+}
+
+.option.wrong {
+    border-bottom-color: var(--color-error);
+    background: var(--color-error-bg);
+}
+
+.option.wrong .option-label {
+    color: var(--color-error);
+}
+
+.option.disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* ===== 解釋 - 雜誌引用風格 ===== */
+.explanation-section {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+    padding-left: var(--space-6);
+    background: var(--color-accent-light);
+    border-left: 3px solid var(--color-accent);
+    position: relative;
+}
+
+.explanation-section::before {
+    content: '"';
+    position: absolute;
+    left: var(--space-2);
+    top: var(--space-2);
+    font-size: var(--text-2xl);
+    font-family: Georgia, serif;
+    color: var(--color-accent);
+    opacity: 0.3;
+    line-height: 1;
+}
+
+.explanation-content {
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: var(--text-sm);
+}
+
+.explanation-content strong {
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+/* ===== 按鈕 - 雜誌風格 ===== */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    padding-top: var(--space-6);
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+
+.btn {
+    padding: var(--space-3) var(--space-6);
+    border: 1px solid var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-base) var(--ease-out);
+    font-family: var(--font-body);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ===== 載入 ===== */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    font-weight: 500;
+}
+
+/* ===== 錯誤 ===== */
+.error-alert {
+    position: fixed;
+    top: var(--space-6);
+    right: var(--space-6);
+    max-width: 500px;
+    background: var(--color-error-bg);
+    border-left: 4px solid var(--color-error);
+    padding: var(--space-6);
+    box-shadow: 0 8px 24px oklch(0% 0 0 / 0.12);
+    z-index: 1001;
+    animation: slideInRight var(--duration-slow) var(--ease-out);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.error-alert p {
+    color: var(--color-error);
+    font-weight: 500;
+    margin-bottom: var(--space-3);
+}
+
+.error-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    font-size: var(--text-xl);
+    color: var(--color-error);
+    cursor: pointer;
+    padding: var(--space-2);
+    line-height: 1;
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.error-close:hover {
+    transform: scale(1.15);
+}
+
+/* ===== 響應式 ===== */
+@media (max-width: 768px) {
+    .page-wrapper {
+        padding: var(--space-12) var(--space-4);
+    }
+    
+    .hero-header h1 {
+        font-size: var(--text-2xl);
+    }
+    
+    .question-section {
+        padding-left: var(--space-4);
+    }
+    
+    .option {
+        padding: var(--space-4);
+        padding-left: var(--space-6);
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .option:hover:not(.disabled),
+    .btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+/* ===== 列印 ===== */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .action-buttons,
+    .loading-overlay,
+    .error-alert {
+        display: none;
+    }
+}
+
+/* Made with Bob */

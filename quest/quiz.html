@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IBM Bob 知識測驗 - 測試您對 Bob 的了解程度">
+    <meta property="og:title" content="IBM Bob 知識測驗">
+    <meta property="og:description" content="測試您對 IBM Bob 的了解程度">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <title>IBM Bob 知識測驗</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header role="banner" class="hero-header">
+            <h1>IBM Bob 知識測驗</h1>
+        </header>
+
+        <main role="main" class="main-content">
+            <article class="quiz-area" id="quizCard">
+                <div class="quiz-header">
+                    <div class="category-badge" id="category" role="status">載入中...</div>
+                </div>
+                
+                <section class="question-section">
+                    <h2 class="question-text" id="questionText">載入題目中...</h2>
+                </section>
+
+                <form class="options-section" id="optionsSection" role="radiogroup" aria-labelledby="questionText">
+                    <!-- 選項將由 JavaScript 動態生成 -->
+                </form>
+
+                <aside class="explanation-section" id="explanationSection" style="display: none;" role="complementary" aria-live="polite">
+                    <div class="explanation-content" id="explanationContent"></div>
+                </aside>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="nextBtn" type="button" aria-label="隨機抽取下一題">
+                        隨機抽取
+                    </button>
+                </div>
+            </article>
+        </main>
+
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" class="loading-overlay" style="display: none;" role="status" aria-live="assertive">
+        <div class="loading-spinner" aria-label="載入中"></div>
+        <p>載入題庫中...</p>
+    </div>
+
+    <!-- Error alert -->
+    <div id="errorAlert" class="error-alert" style="display: none;" role="alert" aria-live="assertive">
+        <p id="errorMessage"></p>
+        <button type="button" class="error-close" aria-label="關閉錯誤訊息">×</button>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
