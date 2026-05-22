@@ -6,13 +6,17 @@
 
 ## 📋 專案簡介
 
-這是一個交通卡使用分析系統的 Java Spring Boot Sample Application，依照 `journey-analysis.html` 挑戰需求建立，並參考 `transaction-monitor` 的首頁說明呈現方式。
+這是一個交通卡使用分析系統的 Java Spring Boot Sample Application，依照 `journey-analysis.html` 挑戰需求建立。
 
 目前已提供：
-- Journey 分析資料模型
-- 熱門路線分析 API
-- 尖峰時段分析 API
-- Dashboard 首頁與表格查詢
+- Journey 基礎資料模型與 CRUD 功能
+- 基本統計 API（總旅程數、總收入）
+- 測試資料（12 筆旅程記錄）
+- Dashboard 前端頁面
+
+**待實作功能**（學員練習）：
+- 📊 **熱門路線分析**：統計起迄站組合 Top 10
+- ⏰ **尖峰時段分析**：24 小時進站分布統計
 
 ## 🚀 啟動方式
 
@@ -31,12 +35,17 @@ mvn spring-boot:run
 
 ## 📦 API
 
-| 方法 | 端點 | 說明 |
-|------|------|------|
-| GET | `/api/journeys` | 查詢所有旅程 |
-| GET | `/api/journeys/statistics` | Dashboard 統計 |
-| GET | `/api/journeys/popular-routes` | 熱門路線 Top 10 |
-| GET | `/api/journeys/peak-hours` | 24 小時進站分布 |
+### 已提供的基本 API：
+| 方法 | 端點 | 說明 | 狀態 |
+|------|------|------|------|
+| GET | `/api/journeys` | 查詢所有旅程 | ✅ 已實作 |
+| GET | `/api/journeys/statistics` | Dashboard 統計 | ✅ 已實作 |
+
+### 待實作的進階 API：
+| 方法 | 端點 | 說明 | 狀態 |
+|------|------|------|------|
+| GET | `/api/journeys/popular-routes` | 熱門路線 Top 10 | ⏳ 待實作 |
+| GET | `/api/journeys/peak-hours` | 24 小時進站分布 | ⏳ 待實作 |
 
 ## 🧱 專案結構
 
@@ -44,11 +53,19 @@ mvn spring-boot:run
 topics/journey-analysis/
 ├── src/main/java/com/krtc/
 │   ├── JourneyAnalysisApplication.java
-│   ├── controller/JourneyController.java
-│   ├── dto/
+│   ├── controller/          # 待實作
+│   ├── dto/                 # 待實作
 │   ├── model/
+│   │   ├── Card.java
+│   │   ├── Station.java
+│   │   ├── Transaction.java
+│   │   └── Journey.java     # 待實作
 │   ├── repository/
-│   └── service/JourneyService.java
+│   │   ├── CardRepository.java
+│   │   ├── StationRepository.java
+│   │   ├── TransactionRepository.java
+│   │   └── JourneyRepository.java  # 待實作
+│   └── service/             # 待實作
 ├── src/main/resources/
 │   ├── application.yml
 │   ├── data.sql
@@ -61,11 +78,11 @@ topics/journey-analysis/
 
 ## 📊 測試資料
 
-已預載：
+已預載（供學員測試使用）：
 - 5 張交通卡
 - 8 個車站
 - 8 筆進出站交易
-- 12 筆旅程資料
+- 12 筆旅程資料（需學員建立 Journey Entity 後才能使用）
 
 ## 🛠 技術棧
 
@@ -76,9 +93,32 @@ topics/journey-analysis/
 - Lombok
 - SpringDoc OpenAPI
 
-## 🎯 後續可延伸
+## 🎯 學習目標
 
-- 補 `JourneyRepository` 聚合查詢，改由 DB 統計
-- 新增單元測試
-- 建立 `.bob/` 規則與文件
-- 擴充 POST / 查詢條件 API
+完成本挑戰後，學員將能夠：
+- 使用 Bob 從現有程式碼快速新增功能
+- 實作複雜的資料聚合與統計分析
+- 設計 RESTful API 端點
+- 撰寫專案 Rules 與 AGENTS.md
+- 建立自訂 Slash Command
+
+## 🎓 實作重點
+
+學員需要實作兩個進階分析功能：
+
+### 1. 熱門路線分析（RouteAnalysisDto + API）
+- 在 `JourneyRepository` 新增聚合查詢方法
+- 在 `JourneyService` 實作 `getPopularRoutes()` 方法
+- 在 `JourneyController` 新增 `GET /api/journeys/popular-routes` 端點
+- 建立 `RouteAnalysisDto` 記錄類別
+
+### 2. 尖峰時段分析（PeakHourDto + API）
+- 在 `JourneyRepository` 新增時段查詢方法
+- 在 `JourneyService` 實作 `getPeakHours()` 方法
+- 在 `JourneyController` 新增 `GET /api/journeys/peak-hours` 端點
+- 建立 `PeakHourDto` 記錄類別
+
+### 3. Bob 進階功能
+- 自訂 `/security-scan` Slash Command
+- 編碼規範 Rules
+- AGENTS.md 指引文件

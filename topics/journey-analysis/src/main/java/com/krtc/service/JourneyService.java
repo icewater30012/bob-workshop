@@ -1,8 +1,6 @@
 package com.krtc.service;
 
 import com.krtc.dto.JourneyStatisticsDto;
-import com.krtc.dto.PeakHourDto;
-import com.krtc.dto.RouteAnalysisDto;
 import com.krtc.model.Journey;
 import com.krtc.repository.JourneyRepository;
 import org.springframework.stereotype.Service;
@@ -32,70 +30,25 @@ public class JourneyService {
                 .map(Journey::getFare)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        java.util.Map<String, Long> routeCounts = journeys.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                        j -> j.getEntryStation().getStationName() + " → " + j.getExitStation().getStationName(),
-                        java.util.stream.Collectors.counting()));
-
-        String busiestRoute = routeCounts.entrySet().stream()
-                .max(java.util.Map.Entry.comparingByValue())
-                .map(java.util.Map.Entry::getKey)
-                .orElse("-");
-
-        java.util.Map<Integer, Long> hourCounts = journeys.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                        j -> j.getEntryTime().getHour(),
-                        java.util.stream.Collectors.counting()));
-
-        String peakHourRange = hourCounts.entrySet().stream()
-                .max(java.util.Map.Entry.comparingByValue())
-                .map(e -> String.format("%02d:00-%02d:59", e.getKey(), e.getKey()))
-                .orElse("-");
+        // 簡單統計，學員需實作更精確的分析
+        String busiestRoute = journeys.isEmpty() ? "-" : "待實作";
+        String peakHourRange = journeys.isEmpty() ? "-" : "待實作";
 
         return new JourneyStatisticsDto(totalJourneys, totalRevenue, busiestRoute, peakHourRange);
     }
 
-    public List<RouteAnalysisDto> getPopularRoutes() {
-        return journeyRepository.findAll().stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                        j -> j.getEntryStation().getStationName() + "|" + j.getExitStation().getStationName(),
-                        java.util.stream.Collectors.toList()))
-                .entrySet()
-                .stream()
-                .map(entry -> {
-                    List<Journey> journeys = entry.getValue();
-                    Journey first = journeys.get(0);
-                    BigDecimal revenue = journeys.stream()
-                            .map(Journey::getFare)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add);
-                    return new RouteAnalysisDto(
-                            first.getEntryStation().getStationName(),
-                            first.getExitStation().getStationName(),
-                            journeys.size(),
-                            revenue
-                    );
-                })
-                .sorted((a, b) -> {
-                    int countCompare = Long.compare(b.tripCount(), a.tripCount());
-                    if (countCompare != 0) {
-                        return countCompare;
-                    }
-                    return b.totalRevenue().compareTo(a.totalRevenue());
-                })
-                .limit(10)
-                .toList();
-    }
+    // TODO: 學員實作 - 熱門路線分析
+    // public List<RouteAnalysisDto> getPopularRoutes() {
+    //     // 統計各起迄站組合的搭乘次數
+    //     // 計算各路線總收入
+    //     // 依搭乘次數排序，取前 10 名
+    // }
 
-    public List<PeakHourDto> getPeakHours() {
-        java.util.Map<Integer, Long> counts = journeyRepository.findAll().stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                        j -> j.getEntryTime().getHour(),
-                        java.util.stream.Collectors.counting()));
-
-        return java.util.stream.IntStream.range(0, 24)
-                .mapToObj(hour -> new PeakHourDto(hour, counts.getOrDefault(hour, 0L)))
-                .toList();
-    }
+    // TODO: 學員實作 - 尖峰時段分析
+    // public List<PeakHourDto> getPeakHours() {
+    //     // 依小時（0-23）統計進站人數
+    //     // 回傳完整的 24 小時分布資料
+    // }
 }
 
 // Made with Bob

@@ -44,6 +44,7 @@ public class Journey {
 
     @Column(nullable = false)
     private Integer durationMinutes;
+
     public Journey() {
     }
 

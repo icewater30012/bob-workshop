@@ -1,8 +1,6 @@
 package com.krtc.controller;
 
 import com.krtc.dto.JourneyStatisticsDto;
-import com.krtc.dto.PeakHourDto;
-import com.krtc.dto.RouteAnalysisDto;
 import com.krtc.model.Journey;
 import com.krtc.service.JourneyService;
 import org.springframework.http.ResponseEntity;
@@ -34,15 +32,17 @@ public class JourneyController {
         return ResponseEntity.ok(journeyService.getStatistics());
     }
 
-    @GetMapping("/popular-routes")
-    public ResponseEntity<List<RouteAnalysisDto>> getPopularRoutes() {
-        return ResponseEntity.ok(journeyService.getPopularRoutes());
-    }
+    // TODO: 學員實作 - 熱門路線分析 API
+    // @GetMapping("/popular-routes")
+    // public ResponseEntity<List<RouteAnalysisDto>> getPopularRoutes() {
+    //     return ResponseEntity.ok(journeyService.getPopularRoutes());
+    // }
 
-    @GetMapping("/peak-hours")
-    public ResponseEntity<List<PeakHourDto>> getPeakHours() {
-        return ResponseEntity.ok(journeyService.getPeakHours());
-    }
+    // TODO: 學員實作 - 尖峰時段分析 API
+    // @GetMapping("/peak-hours")
+    // public ResponseEntity<List<PeakHourDto>> getPeakHours() {
+    //     return ResponseEntity.ok(journeyService.getPeakHours());
+    // }
 }
 
 // Made with Bob

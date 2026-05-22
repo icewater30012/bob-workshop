@@ -1,3 +1,7 @@
+// 基本功能已提供，學員需實作進階分析功能：
+// TODO: GET /api/journeys/popular-routes - 熱門路線 Top 10
+// TODO: GET /api/journeys/peak-hours - 24 小時進站分布
+
 const API_BASE = '/api/journeys';
 
 document.addEventListener('DOMContentLoaded', () => {
