@@ -26,7 +26,7 @@ public class OpenApiConfig {
                         .title("信用卡交易監控系統 API")
                         .version("1.0.0")
                         .description("""
-                                聯邦網通科技股份有限公司 - 信用卡交易監控系統
+                                信用卡交易監控系統
                                 
                                 ## 功能模組
                                 

@@ -99,11 +99,24 @@ cd topics/journey-analysis
 
 ## 🚀 如何使用本專案
 
-### 1. Clone 專案
-```bash
-git clone git@github.com:icewater30012/bob-workshop.git
-cd bob-workshop
-```
+### 1. Fork 專案到你的 GitHub（團隊協作必要步驟）
+
+**重要**：本 Workshop 採用 3 人協作模式，建議先 Fork 專案到你們的團隊 GitHub Repository：
+
+1. 前往 [bob-workshop](https://github.com/icewater30012/bob-workshop)
+2. 點擊右上角 **Fork** 按鈕
+3. 選擇你的 GitHub 帳號或組織
+4. Clone 你們 Fork 的版本：
+   ```bash
+   git clone git@github.com:YOUR_USERNAME/bob-workshop.git
+   cd bob-workshop
+   ```
+
+**協作優勢**：
+- ✅ 各成員可建立自己的分支開發
+- ✅ 透過 Pull Request 進行 Code Review
+- ✅ 避免直接修改原始專案
+- ✅ 保留完整的開發歷程
 
 ### 2. 選擇實戰主題
 
