@@ -12,11 +12,11 @@
         <relativePath/>
     </parent>
     
-    <groupId>com.krtc</groupId>
-    <artifactId>krtc-station-system</artifactId>
+    <groupId>com.metro</groupId>
+    <artifactId>metro-station-system</artifactId>
     <version>1.0.0</version>
-    <name>KRTC Station Management System</name>
-    <description>高雄捷運車站管理系統 - Bob Workshop 初始專案</description>
+    <name>Metro Station Management System</name>
+    <description>捷運車站管理系統 - Bob Workshop 初始專案</description>
     
     <properties>
         <java.version>17</java.version>

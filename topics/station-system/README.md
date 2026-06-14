@@ -10,8 +10,8 @@
 ## 📋 專案資訊
 
 - **目標**: 使用 Bob 為現有系統新增乘客回饋功能
-- **難度**: ⭐ 初級
-- **時長**: 2 小時
+- **難度**: ⭐⭐ 初級
+- **時長**: 1.5-2 小時
 
 ---
 
@@ -53,8 +53,11 @@
 # 1. 進入專案目錄
 cd metro-station-system
 
-# 2. 啟動應用程式
-mvn spring-boot:run
+# 2. 啟動應用程式 (Unix/Linux/macOS)
+./mvnw spring-boot:run
+
+# 或 Windows
+mvnw.cmd spring-boot:run
 ```
 
 應用程式將在 `http://localhost:8080` 啟動。
@@ -143,6 +146,8 @@ metro-station-system/
 │   │               └── app.js               # 前端邏輯
 │   └── test/
 │       └── java/com/metro/
+├── mvnw                                     # Maven Wrapper (Unix/Linux/macOS)
+├── mvnw.cmd                                 # Maven Wrapper (Windows)
 ├── pom.xml                                  # Maven 配置
 └── README.md                                # 專案說明
 ```
@@ -151,38 +156,53 @@ metro-station-system/
 
 ## 🎓 Workshop 任務
 
+**團隊配置**: 4 人（3 人開發 + 1 人製作 PPT）
+**總時長**: 2 小時
+
 在此專案基礎上，學員將使用 Bob 完成以下任務：
 
-### 階段一：專案分析（20 分鐘）
+### 階段一：專案分析與規劃（20 分鐘）
+**分工**: 全員參與
 - 使用 Bob Ask Mode 分析專案結構
 - 理解現有 API 設計
 - 規劃 Feedback 功能整合
+- **PPT 成員**: 開始準備簡報架構與封面
 
-### 階段二：實作回饋功能（40 分鐘）
-- 建立 Feedback 實體
-- 實作 Repository、Service、Controller
+### 階段二：後端實作（30 分鐘）
+**分工**: 開發者 A + B
+- 建立 Feedback 實體與 Repository
+- 實作 Service 層業務邏輯
+- 實作 Controller REST API
 - 與 Station 建立關聯
+- **PPT 成員**: 製作技術架構與 API 設計投影片
 
 ### 階段三：前端整合（30 分鐘）
+**分工**: 開發者 C
 - 在現有 UI 中加入回饋功能
 - 實作回饋提交表單
 - 顯示回饋列表與統計
+- **PPT 成員**: 製作功能展示與 UI 設計投影片
 
-### 階段四：測試與驗證（20 分鐘）
-- 功能測試
-- API 測試
-- 單元測試（選用）
-
-### 階段五：審查與部署（15 分鐘）
-- Code Review
-- Security Review（使用自訂模式）
-- 部署驗證
-
-### 階段六：Bob 功能體驗（15 分鐘）
+### 階段四：測試與 Bob 功能體驗（20 分鐘）
+**分工**: 開發者 A + B
+- 功能測試與 API 測試
 - 建立 Slash Commands (`/deploy-check`)
 - 建立 Custom Mode (Transit Security Expert)
-- 建立 Rules 檔案
-- 建立 AGENTS.md
+- **開發者 C**: 協助 PPT 成員整理程式碼截圖
+- **PPT 成員**: 製作測試結果與 Bob 功能展示投影片
+
+### 階段五：審查與整合（15 分鐘）
+**分工**: 全員參與
+- Code Review
+- Security Review（使用自訂模式）
+- 建立 Rules 檔案與 AGENTS.md
+- **PPT 成員**: 完成簡報最終調整
+
+### 階段六：成果展示（5 分鐘）
+**分工**: PPT 成員主講，開發者補充
+- 簡報展示
+- Demo 系統功能
+- 分享開發心得
 
 ---
 
@@ -190,17 +210,29 @@ metro-station-system/
 
 ### 建置專案
 ```bash
-mvn clean package
+# Unix/Linux/macOS
+./mvnw clean package
+
+# Windows
+mvnw.cmd clean package
 ```
 
 ### 執行測試
 ```bash
-mvn test
+# Unix/Linux/macOS
+./mvnw test
+
+# Windows
+mvnw.cmd test
 ```
 
 ### 清理專案
 ```bash
-mvn clean
+# Unix/Linux/macOS
+./mvnw clean
+
+# Windows
+mvnw.cmd clean
 ```
 
 ---
