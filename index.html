@@ -217,7 +217,7 @@ sudo yum install git</code></pre>
                         </div>
                         
                         <h4 style="margin-top: 24px;">步驟 2：安裝 JDK（Java Development Kit）</h4>
-                        <p>Workshop 專案使用 Spring Boot，需要 Java 11 或更新版本。</p>
+                        <p>Workshop 專案使用 Spring Boot，建議安裝 <strong>JDK 17</strong>（可向下相容編譯 Java 11 程式）。</p>
                         
                         <div style="border: 2px solid rgba(255, 0, 0, 0.4); background-color: rgba(255, 0, 0, 0.05); padding: 16px; border-radius: 8px; margin: 8px 0 16px 0;">
                             <h4 style="margin-top: 0; background: transparent; padding: 0; border: none; cursor: pointer; user-select: none;" onclick="toggleContent(this)">
@@ -225,17 +225,17 @@ sudo yum install git</code></pre>
                             </h4>
                             <ul style="margin-left: 24px; display: none;" class="toggle-content">
                                 <li><strong>方式 A：使用 Homebrew（推薦）</strong>
-                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 11
-brew install openjdk@11
+                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 17
+brew install openjdk@17
 
 # 設定環境變數
-echo 'export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc</code></pre>
                                 </li>
                                 <li style="margin-top: 12px;"><strong>方式 B：使用官方安裝程式</strong>
                                     <ol style="margin-left: 20px; margin-top: 8px;">
                                         <li>前往 <code>https://adoptium.net/</code></li>
-                                        <li>下載 Temurin JDK 11（LTS）for macOS</li>
+                                        <li>下載 Temurin JDK 17（LTS）for macOS</li>
                                         <li>開啟 <code>.pkg</code> 檔案並依照指示安裝</li>
                                     </ol>
                                 </li>
@@ -248,7 +248,7 @@ source ~/.zshrc</code></pre>
                             </h4>
                             <ol style="margin-left: 24px; display: none;" class="toggle-content">
                                 <li>前往 <code>https://adoptium.net/</code></li>
-                                <li>下載 Temurin JDK 11（LTS）for Windows</li>
+                                <li>下載 Temurin JDK 17（LTS）for Windows</li>
                                 <li>執行 <code>.msi</code> 安裝程式</li>
                                 <li>安裝時勾選「Set JAVA_HOME variable」和「Add to PATH」</li>
                                 <li>完成安裝後重新啟動命令提示字元</li>
@@ -261,13 +261,13 @@ source ~/.zshrc</code></pre>
                             </h4>
                             <ul style="margin-left: 24px; display: none;" class="toggle-content">
                                 <li><strong>Ubuntu/Debian</strong>
-                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 11
+                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 17
 sudo apt update
-sudo apt install openjdk-11-jdk -y</code></pre>
+sudo apt install openjdk-17-jdk -y</code></pre>
                                 </li>
                                 <li style="margin-top: 12px;"><strong>Red Hat/Fedora</strong>
-                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 11
-sudo yum install java-11-openjdk-devel -y</code></pre>
+                                    <pre style="margin-top: 8px;"><code># 安裝 OpenJDK 17
+sudo yum install java-17-openjdk-devel -y</code></pre>
                                 </li>
                             </ul>
                         </div>
@@ -275,7 +275,7 @@ sudo yum install java-11-openjdk-devel -y</code></pre>
                         <p style="margin-top: 16px;"><strong>驗證 JDK 安裝：</strong></p>
                         <pre><code>java -version
 javac -version</code></pre>
-                        <p style="margin-top: 8px;">預期輸出：<code>openjdk version "11.x.x"</code> 或更新版本</p>
+                        <p style="margin-top: 8px;">預期輸出：<code>openjdk version "17.x.x"</code></p>
                         
                         <div class="note">
                             <strong>💡 關於 Maven</strong>：專案已內建 Maven Wrapper (<code>mvnw</code>)，無需另外安裝 Maven。Maven Wrapper 會自動下載並使用正確的 Maven 版本，確保團隊開發環境一致。
