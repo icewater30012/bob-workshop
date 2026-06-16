@@ -2,15 +2,20 @@ package com.metro.controller;
 
 import com.metro.model.Station;
 import com.metro.service.StationService;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 車站 REST API 控制器
- * 
+ *
  * 提供車站管理的 RESTful API
  */
 @RestController
@@ -18,6 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class StationController {
     
+    private static final Logger logger = LoggerFactory.getLogger(StationController.class);
     private final StationService stationService;
     
     public StationController(StationService stationService) {
@@ -31,6 +37,7 @@ public class StationController {
      */
     @GetMapping
     public ResponseEntity<List<Station>> getAllStations() {
+        logger.info("API 請求: GET /api/stations - 取得所有車站");
         List<Station> stations = stationService.getAllStations();
         return ResponseEntity.ok(stations);
     }
@@ -43,12 +50,9 @@ public class StationController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Station> getStationById(@PathVariable Long id) {
-        try {
-            Station station = stationService.getStationById(id);
-            return ResponseEntity.ok(station);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        logger.info("API 請求: GET /api/stations/{} - 取得車站", id);
+        Station station = stationService.getStationById(id);
+        return ResponseEntity.ok(station);
     }
     
     /**
@@ -58,13 +62,18 @@ public class StationController {
      * @return 建立的車站
      */
     @PostMapping
-    public ResponseEntity<?> createStation(@RequestBody Station station) {
-        try {
-            Station createdStation = stationService.createStation(station);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdStation);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<?> createStation(@Valid @RequestBody Station station, BindingResult bindingResult) {
+        logger.info("API 請求: POST /api/stations - 建立新車站: code={}", station.getCode());
+        if (bindingResult.hasErrors()) {
+            String errors = bindingResult.getAllErrors().stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.joining(", "));
+            logger.warn("資料驗證失敗: {}", errors);
+            return ResponseEntity.badRequest().body(errors);
         }
+        
+        Station createdStation = stationService.createStation(station);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdStation);
     }
     
     /**
@@ -75,13 +84,18 @@ public class StationController {
      * @return 更新後的車站
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateStation(@PathVariable Long id, @RequestBody Station station) {
-        try {
-            Station updatedStation = stationService.updateStation(id, station);
-            return ResponseEntity.ok(updatedStation);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<?> updateStation(@PathVariable Long id, @Valid @RequestBody Station station, BindingResult bindingResult) {
+        logger.info("API 請求: PUT /api/stations/{} - 更新車站", id);
+        if (bindingResult.hasErrors()) {
+            String errors = bindingResult.getAllErrors().stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.joining(", "));
+            logger.warn("資料驗證失敗: {}", errors);
+            return ResponseEntity.badRequest().body(errors);
         }
+        
+        Station updatedStation = stationService.updateStation(id, station);
+        return ResponseEntity.ok(updatedStation);
     }
     
     /**
@@ -92,12 +106,9 @@ public class StationController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStation(@PathVariable Long id) {
-        try {
-            stationService.deleteStation(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        logger.info("API 請求: DELETE /api/stations/{} - 刪除車站", id);
+        stationService.deleteStation(id);
+        return ResponseEntity.noContent().build();
     }
     
     /**
@@ -108,6 +119,7 @@ public class StationController {
      */
     @GetMapping("/line/{line}")
     public ResponseEntity<List<Station>> getStationsByLine(@PathVariable String line) {
+        logger.info("API 請求: GET /api/stations/line/{} - 取得路線車站", line);
         List<Station> stations = stationService.getStationsByLine(line);
         return ResponseEntity.ok(stations);
     }

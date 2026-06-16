@@ -1,0 +1,24 @@
+{
+  "name": "deploy-check",
+  "description": "檢查車站管理系統部署前的各項條件",
+  "version": "1.0.0",
+  "author": "Bob Workshop Team",
+  "parameters": [
+    {
+      "name": "environment",
+      "description": "目標部署環境",
+      "type": "string",
+      "required": false,
+      "default": "production",
+      "choices": ["development", "staging", "production"]
+    },
+    {
+      "name": "verbose",
+      "description": "顯示詳細檢查資訊",
+      "type": "boolean",
+      "required": false,
+      "default": false
+    }
+  ],
+  "script": "deploy-check.sh"
+}
