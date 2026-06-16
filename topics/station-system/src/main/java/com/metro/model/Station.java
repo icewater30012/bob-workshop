@@ -1,6 +1,8 @@
 package com.metro.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -16,12 +18,18 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @NotBlank(message = "車站代碼不能為空")
+    @Size(min = 1, max = 10, message = "車站代碼長度必須在 1-10 之間")
     @Column(nullable = false, unique = true, length = 10)
     private String code;
     
+    @NotBlank(message = "車站名稱不能為空")
+    @Size(min = 1, max = 100, message = "車站名稱長度必須在 1-100 之間")
     @Column(nullable = false, length = 100)
     private String name;
     
+    @NotBlank(message = "路線不能為空")
+    @Size(min = 1, max = 20, message = "路線長度必須在 1-20 之間")
     @Column(nullable = false, length = 20)
     private String line;
     
